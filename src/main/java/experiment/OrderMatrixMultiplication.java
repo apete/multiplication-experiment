@@ -17,7 +17,7 @@ public class OrderMatrixMultiplication {
 	/**
 	 * Suggested values to try: 30, 80, 200
 	 */
-	static int DIM = 30;
+	static int DIM = 200;
 
 	public static void main(final String[] args) throws RunnerException {
 		final Options opt = new OptionsBuilder().include(OrderMatrixMultiplication.class.getSimpleName()).forks(1)
@@ -64,6 +64,25 @@ public class OrderMatrixMultiplication {
 			for (int c = 0; c < DIM; c++) {
 				for (int j = 0; j < DIM; j++) {
 					prod[i][j] += left[i][c] * right[c][j];
+				}
+			}
+		}
+
+		return prod;
+	}
+
+	@Benchmark
+	public double[][] faster() {
+
+		for (int i = 0; i < DIM; i++) {
+			double[] prodI = prod[i];
+			
+			for (int c = 0; c < DIM; c++) {
+				double[] rightC = right[c];
+				double scal = left[i][c];
+
+				for (int j = 0; j < DIM; j++) {
+					prodI[j] += scal * rightC[j];
 				}
 			}
 		}
