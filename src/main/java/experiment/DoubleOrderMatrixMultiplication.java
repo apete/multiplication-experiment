@@ -12,7 +12,7 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 @State(Scope.Benchmark)
-public class OrderMatrixMultiplication {
+public class DoubleOrderMatrixMultiplication {
 
 	/**
 	 * Suggested values to try: 30, 80, 200
@@ -20,7 +20,7 @@ public class OrderMatrixMultiplication {
 	static int DIM = 200;
 
 	public static void main(final String[] args) throws RunnerException {
-		final Options opt = new OptionsBuilder().include(OrderMatrixMultiplication.class.getSimpleName()).forks(1)
+		final Options opt = new OptionsBuilder().include(DoubleOrderMatrixMultiplication.class.getSimpleName()).forks(1)
 				.warmupIterations(3).measurementIterations(3).build();
 		new Runner(opt).run();
 	}
